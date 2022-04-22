@@ -14,6 +14,8 @@ INCLUDE	= -I includes/
 SRC		= main.c
 
 SRC		+= $(wildcard src/*.c)
+SRC		+= $(wildcard src/utils/*.c)
+SRC		+= $(wildcard src/manager/*.c)
 
 OBJ		= $(SRC:.c=.o)
 
