@@ -14,7 +14,12 @@ static void default_ftp_values(my_ftp_t *ftp, int port, char *path)
 {
     ftp->port = port;
     ftp->socket_fd = -1;
+    ftp->server_socket.sin_family = AF_INET;
+    ftp->server_socket.sin_addr.s_addr = INADDR_ANY;
+    ftp->server_socket.sin_port = htons(port);
     ftp->path = strdup(path);
+    ftp->clients = NULL;
+    ftp->is_running = 1;
 }
 
 my_ftp_t *initialize_ftp(int argc, char **argv)

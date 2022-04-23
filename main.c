@@ -21,6 +21,7 @@ static int print_usage()
 
 int main(int argc, char **argv)
 {
+    int exit_status;
     my_ftp_t *ftp = NULL;
 
     if (argc == 2 && strcmp(argv[1], "-help") == 0)
@@ -28,8 +29,11 @@ int main(int argc, char **argv)
     ftp = initialize_ftp(argc, argv);
     if (ftp == NULL)
         return (84);
-    if (initialize_server(ftp))
+    exit_status = initialize_server(ftp);
+    if (exit_status)
         run_ftp(ftp);
     destroy_ftp(ftp);
+    if (!exit_status)
+        return (84);
     return (0);
 }
