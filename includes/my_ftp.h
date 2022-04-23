@@ -10,14 +10,17 @@
     #include <arpa/inet.h>
     #include <sys/socket.h>
     #include <sys/select.h>
-    #include <my_utils.h>
+    #include "ftp_command.h"
+    #include "client_list.h"
+    #include "command_list.h"
 
 typedef struct my_ftp_s{
     int port;
     int socket_fd;
     char *path;
     struct sockaddr_in server_socket;
-    list_t *clients;
+    client_list_t *clients;
+    command_list_t *commands;
     int is_running;
     fd_set readfds;
     int highest_socket;

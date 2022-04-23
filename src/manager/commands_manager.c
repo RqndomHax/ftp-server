@@ -5,18 +5,26 @@
 ** commands_manager
 */
 
+#include <stdlib.h>
+#include <string.h>
 #include <command_manager.h>
-#include <my_utils.h>
+#include <client_manager.h>
+#include <client_list.h>
 
-char **parse_command(char *raw_command)
+command_list_t *query_command(char const *command_name, command_list_t *commands)
 {
-    char **command = my_str_to_word_array(raw_command, " ");
+    command_list_t *command = commands;
 
-    return (command);
+    while (command != NULL) {
+        if (strcmp(command_name, command->command.command_name) == 0)
+            return (command);
+        command = command->next;
+    }
+    return (NULL);
 }
 
-void execute_command(char **command, command_t *commands)
+void command_quit(char **args, my_ftp_t *ftp, client_list_t *client)
 {
-    (void) command;
-    (void) commands;
+    (void) args;
+    close_client(ftp, client);
 }

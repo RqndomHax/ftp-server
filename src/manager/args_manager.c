@@ -19,6 +19,7 @@ static void default_ftp_values(my_ftp_t *ftp, int port, char *path)
     ftp->server_socket.sin_port = htons(port);
     ftp->path = strdup(path);
     ftp->clients = NULL;
+    ftp->commands = NULL;
     ftp->is_running = 1;
 }
 
@@ -34,5 +35,6 @@ my_ftp_t *initialize_ftp(int argc, char **argv)
     if (ftp == NULL)
         return (NULL);
     default_ftp_values(ftp, atoi(argv[1]), argv[2]);
+    retrieve_commands(&ftp->commands);
     return (ftp);
 }

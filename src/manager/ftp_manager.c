@@ -8,6 +8,7 @@
 #include <ftp_manager.h>
 #include <client_manager.h>
 #include <my_utils.h>
+#include <client_list.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -17,7 +18,8 @@ void destroy_ftp(my_ftp_t *ftp)
         shutdown(ftp->socket_fd, SHUT_RDWR);
     if (ftp->path != NULL)
         free(ftp->path);
-    list_destroy(&ftp->clients);
+    destroy_clients(&ftp->clients);
+    destroy_commands(&ftp->commands);
     free(ftp);
 }
 
@@ -42,7 +44,11 @@ static void loop_ftp(my_ftp_t *ftp)
 {
     FD_ZERO(&ftp->readfds);
     FD_SET(ftp->socket_fd, &ftp->readfds);
+    ftp->highest_socket = ftp->socket_fd;
+    add_clients(ftp);
+    select(ftp->highest_socket + 1, &ftp->readfds, NULL, NULL, NULL);
     retrieve_new_client(ftp);
+    check_on_clients(ftp);
     if (ftp->is_running)
         loop_ftp(ftp);
 }
@@ -51,6 +57,5 @@ void run_ftp(my_ftp_t *ftp)
 {
     if (listen(ftp->socket_fd, 3) < 0)
         return;
-    ftp->highest_socket = ftp->socket_fd;
     loop_ftp(ftp);
 }
