@@ -8,6 +8,7 @@
 #include <my_ftp.h>
 #include <string.h>
 #include <args_manager.h>
+#include <ftp_manager.h>
 
 static int print_usage()
 {
@@ -27,5 +28,8 @@ int main(int argc, char **argv)
     ftp = initialize_ftp(argc, argv);
     if (ftp == NULL)
         return (84);
+    if (initialize_server(ftp))
+        run_ftp(ftp);
+    destroy_ftp(ftp);
     return (0);
 }

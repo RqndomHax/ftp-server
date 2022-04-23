@@ -20,5 +20,6 @@ void clear_array(char **array);
 
 char **my_str_to_word_array(char *str, char *dlm);
 
+int is_positive_number(char const *target);
 
 #endif /* !UTILS_H_ */
