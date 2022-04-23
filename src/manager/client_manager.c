@@ -36,11 +36,12 @@ static void check_client(my_ftp_t *ftp, client_list_t *client)
     command_list_t *command;
     char **raw_command;
     char buffer[1025];
-    int read_return = 0;
+    int length_read = 0;
 
-    read_return = read(client->client_socket, buffer, 1024);
-    if (read_return == 0)
+    length_read = read(client->client_socket, buffer, 1024);
+    if (length_read == 0)
         return (close_client(ftp, client));
+    clear_string_end(buffer, length_read);
     raw_command = my_str_to_word_array(buffer, " ");
     if (raw_command == NULL)
         return;

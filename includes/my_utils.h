@@ -29,4 +29,6 @@ int retrieve_client_socket(my_ftp_t *ftp);
 
 void retrieve_commands(command_list_t **commands);
 
+void clear_string_end(char *string, int length);
+
 #endif /* !UTILS_H_ */
