@@ -23,7 +23,6 @@ void destroy_ftp(my_ftp_t *ftp)
 
 int initialize_server(my_ftp_t *ftp)
 {
-    int opt = 1;
     struct sockaddr_in *serv = &ftp->server_socket;
     int bind_result = -1;
     int *fd = &ftp->socket_fd;
@@ -43,14 +42,15 @@ static void loop_ftp(my_ftp_t *ftp)
 {
     FD_ZERO(&ftp->readfds);
     FD_SET(ftp->socket_fd, &ftp->readfds);
-    retrieve_client(ftp);
+    retrieve_new_client(ftp);
     if (ftp->is_running)
-        run_ftp(ftp);
+        loop_ftp(ftp);
 }
 
 void run_ftp(my_ftp_t *ftp)
 {
     if (listen(ftp->socket_fd, 3) < 0)
         return;
+    ftp->highest_socket = ftp->socket_fd;
     loop_ftp(ftp);
 }

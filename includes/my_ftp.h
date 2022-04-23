@@ -20,6 +20,7 @@ typedef struct my_ftp_s{
     list_t *clients;
     int is_running;
     fd_set readfds;
+    int highest_socket;
 }my_ftp_t;
 
 #endif /* !MY_FTP_H_ */

@@ -21,9 +21,8 @@ static int retrieve_client_socket(my_ftp_t *ftp)
     return (accept(fd, (struct sockaddr *restrict) serv, sock_length));
 }
 
-void retrieve_new_cclient(my_ftp_t *ftp)
+void retrieve_new_client(my_ftp_t *ftp)
 {
-    int is_listening = -1;
     int client_socket = -1;
 
     if (FD_ISSET(ftp->socket_fd, &ftp->readfds) == 0)
@@ -35,4 +34,3 @@ void retrieve_new_cclient(my_ftp_t *ftp)
     }
     list_add(&ftp->clients, client_socket);
 }
-
