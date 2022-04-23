@@ -27,6 +27,6 @@ command_list_t *query_command(char const *command_name, command_list_t *commands
 void command_quit(char **args, my_ftp_t *ftp, client_list_t *client)
 {
     (void) args;
-    dprintf(client->client_socket, "221 See you next time.\n");
+    dprintf(client->client_socket, "221 See you next time.\r\n");
     close_client(ftp, client);
 }
