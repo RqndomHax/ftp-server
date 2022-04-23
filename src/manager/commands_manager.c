@@ -5,6 +5,7 @@
 ** commands_manager
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <command_manager.h>
@@ -26,5 +27,6 @@ command_list_t *query_command(char const *command_name, command_list_t *commands
 void command_quit(char **args, my_ftp_t *ftp, client_list_t *client)
 {
     (void) args;
+    dprintf(client->client_socket, "221 See you next time.\n");
     close_client(ftp, client);
 }

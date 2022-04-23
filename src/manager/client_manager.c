@@ -79,5 +79,5 @@ void retrieve_new_client(my_ftp_t *ftp)
         return;
     }
     add_to_clients(&ftp->clients, client_socket);
-    dprintf(client_socket, "Hello from server!\n");
+    dprintf(client_socket, "220 Welcome to the RqndomFTP, have fun!\n");
 }
