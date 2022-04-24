@@ -7,6 +7,8 @@
 
 #ifndef COMMAND_MANAGER_H_
     #define COMMAND_MANAGER_H_
+    #include <stdio.h>
+    #include <string.h>
     #include <command_list.h>
 
 typedef struct my_ftp_s my_ftp_t;
