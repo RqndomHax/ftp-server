@@ -35,6 +35,7 @@ client_list_t *add_to_clients(client_list_t **list, int client_socket)
         return (NULL);
     client->client_socket = client_socket;
     client->id = -1;
+    client->is_authenticated = 0;
     client->next = NULL;
     if (*list == NULL) {
         *list = client;

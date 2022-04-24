@@ -15,4 +15,8 @@ command_list_t *query_command(char const *name, command_list_t *commands);
 
 void command_quit(char **args, my_ftp_t *ftp, client_list_t *client);
 
+void command_pass(char **args, my_ftp_t *ftp, client_list_t *client);
+
+void command_user(char **args, my_ftp_t *ftp, client_list_t *client);
+
 #endif /* !COMMAND_MANAGER_H_ */

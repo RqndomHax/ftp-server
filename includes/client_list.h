@@ -11,6 +11,7 @@
 typedef struct client_list_s
 {
     int id;
+    int is_authenticated;
     int client_socket;
     struct client_list_s *next;
 }client_list_t;
