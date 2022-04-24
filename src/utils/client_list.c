@@ -5,8 +5,9 @@
 ** utils
 */
 
-#include <my_utils.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <my_utils.h>
 
 void destroy_clients(client_list_t **list)
 {
@@ -15,6 +16,7 @@ void destroy_clients(client_list_t **list)
 
     while (current != NULL) {
         next = current->next;
+        close(current->client_socket);
         free(current);
         current = next;
     }
