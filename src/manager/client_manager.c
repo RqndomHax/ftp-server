@@ -74,10 +74,8 @@ void retrieve_new_client(my_ftp_t *ftp)
     if (FD_ISSET(ftp->socket_fd, &ftp->readfds) == 0)
         return;
     client_socket = retrieve_client_socket(ftp);
-    if (client_socket < 0) {
-        print_error("Could not bind new client socket.");
+    if (client_socket < 0)
         return;
-    }
     add_to_clients(&ftp->clients, client_socket);
     dprintf(client_socket, "220 Welcome to the RqndomFTP, have fun!\n");
 }
