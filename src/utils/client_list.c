@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <my_utils.h>
+#include <stdio.h>
 
 void destroy_clients(client_list_t **list)
 {
@@ -16,6 +17,7 @@ void destroy_clients(client_list_t **list)
 
     while (current != NULL) {
         next = current->next;
+        dprintf(current->client_socket, "221 Server closed.\r\n");
         close(current->client_socket);
         free(current);
         current = next;
