@@ -41,10 +41,7 @@ void command_directory_get(char **args, my_ftp_t *ftp, client_list_t *client)
     (void) ftp;
     if (!has_required_power(client, 1))
         return;
-    if (strcmp(ftp->path, client->workdir) == 0)
-        dprintf(client->client_socket, "257 \"%s\"\r\n", "/");
-    else
-        dprintf(client->client_socket, "257 \"%s\"\r\n", client->workdir);
+    dprintf(client->client_socket, "257 \"%s\"\r\n", client->workdir);
 }
 
 void command_directory(char **args, my_ftp_t *ftp, client_list_t *client)
