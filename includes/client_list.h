@@ -11,14 +11,14 @@
 typedef struct client_list_s
 {
     int id;
-    int is_authenticated;
     int client_socket;
+    char *workdir;
     struct client_list_s *next;
 }client_list_t;
 
 void destroy_clients(client_list_t **list);
 
-client_list_t *add_to_clients(client_list_t **list, int client_socket);
+client_list_t *add_to_clients(client_list_t **list, int socket, char *dir);
 
 void remove_from_clients(client_list_t **list, client_list_t *target);
 

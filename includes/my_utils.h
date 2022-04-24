@@ -36,4 +36,8 @@ void change_running_state(my_ftp_t *ftp);
 
 void signal_handler(int sig_num);
 
+char *append_path(char *dest, char *src);
+
+char *retrieve_workdir(char *root, char *current);
+
 #endif /* !UTILS_H_ */

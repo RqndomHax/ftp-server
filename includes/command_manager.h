@@ -27,6 +27,12 @@ void command_noop(char **args, my_ftp_t *ftp, client_list_t *client);
 
 void command_unimplemented(char **args, my_ftp_t *ftp, client_list_t *client);
 
+void command_directory_get(char **args, my_ftp_t *ftp, client_list_t *client);
+
+void command_directory(char **args, my_ftp_t *ftp, client_list_t *client);
+
+void command_directory_up(char **args, my_ftp_t *ftp, client_list_t *client);
+
 int has_required_power(client_list_t *client, int required_power);
 
 #endif /* !COMMAND_MANAGER_H_ */

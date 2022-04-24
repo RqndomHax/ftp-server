@@ -78,6 +78,6 @@ void retrieve_new_client(my_ftp_t *ftp)
     client_socket = retrieve_client_socket(ftp);
     if (client_socket < 0)
         return;
-    add_to_clients(&ftp->clients, client_socket);
+    add_to_clients(&ftp->clients, client_socket, strdup(""));
     dprintf(client_socket, "220 Welcome to the RqndomFTP, have fun!\n");
 }

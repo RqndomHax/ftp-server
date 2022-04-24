@@ -19,13 +19,15 @@ void destroy_clients(client_list_t **list)
         next = current->next;
         dprintf(current->client_socket, "221 Server closed.\r\n");
         close(current->client_socket);
+        if (current->workdir != NULL)
+            free(current->workdir);
         free(current);
         current = next;
     }
     *list = NULL;
 }
 
-client_list_t *add_to_clients(client_list_t **list, int client_socket)
+client_list_t *add_to_clients(client_list_t **list, int socket, char *dir)
 {
     client_list_t *client = NULL;
     client_list_t *to_last = *list;
@@ -33,9 +35,9 @@ client_list_t *add_to_clients(client_list_t **list, int client_socket)
     client = malloc(sizeof(client_list_t));
     if (client == NULL)
         return (NULL);
-    client->client_socket = client_socket;
+    client->client_socket = socket;
     client->id = -1;
-    client->is_authenticated = 0;
+    client->workdir = dir;
     client->next = NULL;
     if (*list == NULL) {
         *list = client;
@@ -64,6 +66,8 @@ void remove_from_clients(client_list_t **list, client_list_t *target)
             *list = *list != NULL ? (*list)->next : NULL;
         else
             last->next = current->next;
+        if (target->workdir != NULL)
+            free(target->workdir);
         free(target);
         return;
     }
