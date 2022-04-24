@@ -18,7 +18,7 @@ SRC		+= $(wildcard src/*/*.c)
 
 OBJ		= $(SRC:.c=.o)
 
-OUT		= my_ftp
+OUT		= myftp
 
 all: $(OUT)
 
