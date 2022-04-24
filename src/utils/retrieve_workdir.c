@@ -7,6 +7,8 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 static int get_total_length(int current_length, int root_length)
 {
@@ -28,6 +30,21 @@ static char *get_workdir(char *current, int length)
     return (workdir);
 }
 
+static int is_folder(char *current)
+{
+    struct stat buffer;
+
+    if (access(current, F_OK | R_OK) || stat(current, &buffer)) {
+        free(current);
+        return (0);
+    }
+    if (!S_ISDIR(buffer.st_mode)) {
+        free(current);
+        return (0);
+    }
+    return (1);
+}
+
 char *retrieve_workdir(char *root, char *current)
 {
     char *workdir = NULL;
@@ -35,7 +52,7 @@ char *retrieve_workdir(char *root, char *current)
     int current_length = 0;
     int root_length = 0;
 
-    if (current == NULL)
+    if (current == NULL || !is_folder(current))
         return (NULL);
     current_length = strlen(current);
     root_length = strlen(root);
