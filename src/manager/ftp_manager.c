@@ -15,13 +15,16 @@
 
 void destroy_ftp(my_ftp_t *ftp)
 {
-    if (ftp->socket_fd != -1)
+    if (ftp->socket_fd != -1) {
         shutdown(ftp->socket_fd, SHUT_RDWR);
-    if (ftp->path != NULL)
+        ftp->socket_fd = -1;
+    }
+    if (ftp->path != NULL) {
         free(ftp->path);
+        ftp->path = NULL;
+    }
     destroy_clients(&ftp->clients);
     destroy_commands(&ftp->commands);
-    free(ftp);
 }
 
 int initialize_server(my_ftp_t *ftp)

@@ -32,7 +32,10 @@ int main(int argc, char **argv)
     exit_status = initialize_server(ftp);
     if (exit_status)
         run_ftp(ftp);
-    destroy_ftp(ftp);
+    if (ftp != NULL) {
+        destroy_ftp(ftp);
+        free(ftp);
+    }
     if (!exit_status)
         return (84);
     return (0);
