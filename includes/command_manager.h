@@ -23,6 +23,10 @@ void command_user(char **args, my_ftp_t *ftp, client_list_t *client);
 
 void command_help(char **args, my_ftp_t *ftp, client_list_t *client);
 
+void command_noop(char **args, my_ftp_t *ftp, client_list_t *client);
+
 void command_unimplemented(char **args, my_ftp_t *ftp, client_list_t *client);
+
+int has_required_power(client_list_t *client, int required_power);
 
 #endif /* !COMMAND_MANAGER_H_ */

@@ -14,6 +14,7 @@ void retrieve_commands(command_list_t **commands)
     add_to_commands(commands, (command_t) {"USER", command_user});
     add_to_commands(commands, (command_t) {"PASS", command_pass});
     add_to_commands(commands, (command_t) {"HELP", command_help});
+    add_to_commands(commands, (command_t) {"NOOP", command_noop});
     add_to_commands(commands, (command_t) {"PWD", command_unimplemented});
     add_to_commands(commands, (command_t) {"CWD", command_unimplemented});
 }
