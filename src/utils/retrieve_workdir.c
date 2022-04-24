@@ -61,7 +61,7 @@ char *retrieve_workdir(char *root, char *current)
     if (workdir == NULL)
         return (NULL);
     if (current_length > root_length)
-        strcat(workdir, &current[root_length - 1]);
+        strcat(workdir, &current[root_length]);
     else
         strcat(workdir, "/");
     free(current);

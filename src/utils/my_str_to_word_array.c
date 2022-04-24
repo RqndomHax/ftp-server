@@ -19,20 +19,16 @@ static int compare_str(word_array_t *info, int index)
 static int get_word_array_size(word_array_t *info)
 {
     int size = 1;
-    int has_word = 0;
     int compared = 0;
 
     for (int i = 0; info->str[i]; i++) {
         compared = compare_str(info, i);
-        if (compared && has_word) {
+        if (compared) {
             size++;
             i += info->dlm_size - 1;
-            has_word = 0;
             compared = 0;
             continue;
         }
-        if (!compared)
-            has_word = 1;
     }
     return (size);
 }
@@ -47,10 +43,6 @@ static int translate_to_word(word_array_t *info, int re, int *index)
         return (1);
     for (int i = *index; !compare_str(info, i) && str[i]; i++, size++);
     size += info->dlm_size - 1;
-    if (size == 0) {
-        *index += info->dlm_size;
-        return (0);
-    }
     r[re] = malloc(size + 1);
     if (r[re] == NULL)
         return (-1);

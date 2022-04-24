@@ -22,7 +22,7 @@ void command_pass(char **args, my_ftp_t *ftp, client_list_t *client)
         dprintf(client->client_socket, "%s", already_connected);
         return;
     }
-    if (client->id == -11 && !args[0]) {
+    if (client->id == -11 && (!args[0] || strlen(args[0]) == 0)) {
         client->id = 1;
         dprintf(client->client_socket, "%s", successfully_logged_in);
         return;

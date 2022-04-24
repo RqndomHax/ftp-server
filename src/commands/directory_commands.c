@@ -41,7 +41,10 @@ void command_directory_get(char **args, my_ftp_t *ftp, client_list_t *client)
     (void) ftp;
     if (!has_required_power(client, 1))
         return;
-    dprintf(client->client_socket, "257 \"%s\"\r\n", client->workdir);
+    if (client->workdir[0] == '/')
+        dprintf(client->client_socket, "257 \"%s\"\r\n", client->workdir);
+    else
+        dprintf(client->client_socket, "257 \"/%s\"\r\n", client->workdir);
 }
 
 void command_directory(char **args, my_ftp_t *ftp, client_list_t *client)
@@ -49,7 +52,7 @@ void command_directory(char **args, my_ftp_t *ftp, client_list_t *client)
     (void) ftp;
     if (!has_required_power(client, 1))
         return;
-    if (!args[0]) {
+    if (!args[0] || strlen(args[0]) == 0) {
         dprintf(client->client_socket, "550 Failed to change directory.\r\n");
         return;
     }
