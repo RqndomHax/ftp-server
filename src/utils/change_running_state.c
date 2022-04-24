@@ -24,8 +24,9 @@ void change_running_state(my_ftp_t *ftp)
     }
 }
 
-void signal_handler(int sing_num)
+void signal_handler(int sig_num)
 {
+    (void) sig_num;
     signal(SIGINT, signal_handler);
     change_running_state(NULL);
 }

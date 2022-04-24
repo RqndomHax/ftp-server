@@ -42,6 +42,8 @@ static void check_client(my_ftp_t *ftp, client_list_t *client)
     if (length_read == 0)
         return (close_client(ftp, client));
     clear_string_end(buffer, length_read);
+    if (buffer[0] == 0)
+        return;
     raw_command = my_str_to_word_array(buffer, " ");
     if (raw_command == NULL)
         return;

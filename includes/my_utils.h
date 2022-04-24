@@ -34,6 +34,6 @@ void clear_string_end(char *string, int length);
 
 void change_running_state(my_ftp_t *ftp);
 
-void signal_handler(int sing_num);
+void signal_handler(int sig_num);
 
 #endif /* !UTILS_H_ */
