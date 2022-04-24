@@ -15,16 +15,16 @@ void command_pass(char **args, my_ftp_t *ftp, client_list_t *client)
 
     (void) ftp;
     if (client->id == -1) {
-        dprintf(client->client_socket, no_user);
+        dprintf(client->client_socket, "%s", no_user);
         return;
     }
     if (client->id > 0) {
-        dprintf(client->client_socket, already_connected);
+        dprintf(client->client_socket, "%s", already_connected);
         return;
     }
     if (client->id == -11 && !args[0]) {
         client->id = 1;
-        dprintf(client->client_socket, successfully_logged_in);
+        dprintf(client->client_socket, "%s", successfully_logged_in);
         return;
     }
     dprintf(client->client_socket, "530 Login incorrect.\r\n");
@@ -38,12 +38,12 @@ void command_user(char **args, my_ftp_t *ftp, client_list_t *client)
 
     (void) ftp;
     if (client->id > 0) {
-        dprintf(client->client_socket, switch_error);
+        dprintf(client->client_socket, "%s", switch_error);
         return;
     }
     if (args[0] && strcmp("Anonymous", args[0]) == 0)
         client->id = -11;
     else
         client->id = -2;
-    dprintf(client->client_socket, password_required);
+    dprintf(client->client_socket, "%s", password_required);
 }
