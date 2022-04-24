@@ -42,7 +42,6 @@ static void check_client(my_ftp_t *ftp, client_list_t *client)
     if (length_read == 0)
         return (close_client(ftp, client));
     clear_string_end(buffer, length_read);
-    buffer[length_read - 1] = 0;
     if (buffer[0] == 0)
         return;
     raw_command = my_str_to_word_array(buffer, " ");
@@ -51,6 +50,8 @@ static void check_client(my_ftp_t *ftp, client_list_t *client)
     command = query_command(raw_command[0], ftp->commands);
     if (command != NULL)
         command->command.ptr(&raw_command[1], ftp, client);
+    else
+        unknown_command(client);
     clear_array(raw_command);
 }
 

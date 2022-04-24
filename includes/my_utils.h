@@ -40,4 +40,6 @@ char *append_path(char *dest, char *src);
 
 char *retrieve_workdir(char *root, char *current);
 
+void unknown_command(client_list_t *client);
+
 #endif /* !UTILS_H_ */
