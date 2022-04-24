@@ -60,7 +60,7 @@ void check_on_clients(my_ftp_t *ftp)
         if (FD_ISSET(current->client_socket, &ftp->readfds) == 0) {
             current = current->next;
             continue;
-        }   
+        }
         tmp = current;
         current = current->next;
         check_client(ftp, tmp);

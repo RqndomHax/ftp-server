@@ -10,7 +10,7 @@
 #include <args_manager.h>
 #include <ftp_manager.h>
 
-static int print_usage()
+static int print_usage(void)
 {
     printf("USAGE: ./myftp port path\n");
     printf("\tport is the port number on which the server socket listens\n");

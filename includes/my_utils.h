@@ -15,6 +15,7 @@ typedef struct word_array_s
     char **result;
     char *dlm;
     int dlm_size;
+    int total_size;
 }word_array_t;
 
 void clear_array(char **array);

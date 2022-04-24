@@ -12,12 +12,12 @@
 #include <client_manager.h>
 #include <client_list.h>
 
-command_list_t *query_command(char const *command_name, command_list_t *commands)
+command_list_t *query_command(char const *name, command_list_t *commands)
 {
     command_list_t *command = commands;
 
     while (command != NULL) {
-        if (strcmp(command_name, command->command.command_name) == 0)
+        if (strcmp(name, command->command.command_name) == 0)
             return (command);
         command = command->next;
     }
