@@ -21,4 +21,8 @@ void command_pass(char **args, my_ftp_t *ftp, client_list_t *client);
 
 void command_user(char **args, my_ftp_t *ftp, client_list_t *client);
 
+void command_help(char **args, my_ftp_t *ftp, client_list_t *client);
+
+void command_unimplemented(char **args, my_ftp_t *ftp, client_list_t *client);
+
 #endif /* !COMMAND_MANAGER_H_ */

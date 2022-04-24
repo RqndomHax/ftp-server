@@ -21,6 +21,43 @@ command_list_t *query_command(char const *name, command_list_t *commands)
     return (NULL);
 }
 
+static int is_authenticated(client_list_t *client)
+{
+    int socket = client->client_socket;
+
+    if (0 < client->id)
+        return (1);
+    dprintf(socket, "530 Please login with USER and PASS.\r\n");
+    return (0);
+}
+
+void command_unimplemented(char **args, my_ftp_t *ftp, client_list_t *client)
+{
+    (void) ftp;
+    (void) args;
+    if (!is_authenticated(client))
+        return;
+    dprintf(client->client_socket, "502 command not implemented.\r\n");
+}
+
+void command_help(char **args, my_ftp_t *ftp, client_list_t *client)
+{
+    int socket = client->client_socket;
+
+    (void) args;
+    (void) ftp;
+    if (!is_authenticated(client))
+        return;
+    dprintf(socket, "214-The following commands are recognized.\n" \
+            " ABOR ACCT ALLO APPE CDUP CWD  DELE EPRT EPSV FEAT HELP " \
+            "LIST MDTM MKD\n MODE NLST NOOP OPTS PASS PASV PORT PWD  " \
+            "QUIT REIN REST RETR RMD  RNFR\n RNTO SITE SIZE SMNT STAT " \
+            "STOR STOU STRU SYST TYPE USER XCUP XCWD XMKD \n" \
+            " XPWD XRMD\r\n");
+    dprintf(client->client_socket, "214 Help OK.\r\n");
+
+}
+
 void command_quit(char **args, my_ftp_t *ftp, client_list_t *client)
 {
     (void) args;
