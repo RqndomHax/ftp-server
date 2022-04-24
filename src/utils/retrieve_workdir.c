@@ -39,12 +39,12 @@ char *retrieve_workdir(char *root, char *current)
         return (NULL);
     current_length = strlen(current);
     root_length = strlen(root);
-    length = get_total_length(current_length, root_length);
+    length = get_total_length(current_length, root_length) + 1;
     workdir = get_workdir(current, length);
     if (workdir == NULL)
         return (NULL);
     if (current_length > root_length)
-        strcat(workdir, &current[root_length]);
+        strcat(workdir, &current[root_length - 1]);
     else
         strcat(workdir, "/");
     free(current);
